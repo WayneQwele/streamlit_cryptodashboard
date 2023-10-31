@@ -208,9 +208,6 @@ orderbook_data_appended_df = pd.concat(
 
 with st.container():
     # This container is for the line data from market stats
-    options = st.multiselect(
-        'Select Ticker information to display',
-        filtered_ticker_pairs)
 
     # my_table = st.table(market_data['ETHUP-USDT'])
     # market_data_appended_df['changeRate'] = market_data_appended_df['changeRate'].apply(
