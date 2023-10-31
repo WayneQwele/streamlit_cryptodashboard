@@ -18,7 +18,7 @@ def main_candle(symbol: str = 'BTC-USDT') -> pd.DataFrame:
     if response.status_code == 200:  # if result is GOOD
         data = json.loads(response.text)  # load the json response from API
         # create dataframe out of json response
-        data_pd = pd.DataFrame(data, columns=[
+        data_pd = pd.DataFrame(data['data'], columns=[
                                'unix', 'open', 'close', 'high', 'low', 'volume', 'turnover'])
         data_pd['date'] = pd.to_datetime(
             data_pd['unix'], unit='s')  # add a human readable date
@@ -80,3 +80,22 @@ def marketstatspull(symbol: str = 'LOOM-BTC') -> pd.DataFrame:
 
     if __name__ == "__main__":
         pass
+
+
+#
+def clean_dataframe(df):
+    # Convert symbol and symbolName to string
+    df['symbol'] = df['symbol'].astype(str)
+    df['symbolName'] = df['symbolName'].astype(str)
+
+    # Convert the specified columns to float
+    float_columns = ['buy', 'sell', 'changeRate', 'changePrice', 'high', 'low',
+                     'vol', 'volValue', 'last', 'averagePrice', 'takerFeeRate', 'makerFeeRate']
+    df[float_columns] = df[float_columns].apply(
+        pd.to_numeric, errors='coerce', downcast='float')
+
+    # Convert takerCoefficient and makerCoefficient to int
+    int_columns = ['takerCoefficient', 'makerCoefficient']
+    df[int_columns] = df[int_columns].apply(
+        lambda x: x.astype(str).str.replace(',', '').astype(int))
+    return df
