@@ -136,8 +136,7 @@ with st.container():
 with st.sidebar:
     st.subheader('Dashboard Summary and build.', divider='rainbow')
     st.markdown('''
-    :red[Streamlit] :orange[can] :green[write] :blue[text] :violet[in]
-    :gray[pretty] :rainbow[colors].\n
+    :red[Ndumiso] :orange[made] :green[this] :\n
     This code is a Streamlit app that pulls market data from the Kucoin exchange API and displays it in a dashboard. 
                 The app imports various libraries such as Streamlit, Pandas, Plotly, and requests.
                  It also imports functions from a custom module called "dataextraction" for extended data manipulation. 
